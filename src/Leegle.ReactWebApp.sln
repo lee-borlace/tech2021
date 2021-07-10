@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leegle.ReactWebApp.Web", "Leegle.ReactWebApp.Web\Leegle.ReactWebApp.Web.csproj", "{1A00252F-7F70-4FCF-97AF-F3709D0876AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A00252F-7F70-4FCF-97AF-F3709D0876AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A00252F-7F70-4FCF-97AF-F3709D0876AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A00252F-7F70-4FCF-97AF-F3709D0876AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A00252F-7F70-4FCF-97AF-F3709D0876AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F44B5626-36B8-48FE-8C94-98B05B8708AD}
+	EndGlobalSection
+EndGlobal
