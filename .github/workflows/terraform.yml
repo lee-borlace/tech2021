@@ -39,7 +39,7 @@ jobs:
 
     - name: Terraform Validate
       id: validate
-      run: terraform validate -no-color -var-file ".\environments\dev.tfvars"
+      run: terraform validate -no-color
       continue-on-error: false
 
     - name: Terraform Plan
