@@ -71,5 +71,10 @@ Resource group :
 ## Set up variables in relevant environment for the deployment service principal
 We need to tell GH about the service principal so it can use it to deploy. Set up these for each environment, and plug in the details from our SP
 
+AZURE_AD_CLIENT_ID – Will be the service principal ID from above
+AZURE_AD_CLIENT_SECRET – The secret that was created as part of the Azure Service Principal
+AZURE_AD_TENANT_ID – The Azure AD tenant ID to where the service principal was created
+AZURE_SUBSCRIPTION_ID – Subscription ID of where you want to deploy the Terraform
+
 
 
