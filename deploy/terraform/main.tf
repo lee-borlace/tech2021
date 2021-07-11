@@ -1,3 +1,4 @@
+# Configure the Azure provider
 terraform {
   required_providers {
     azurerm = {
@@ -14,6 +15,6 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "lee-syd-tst-arg-rwa"
-  location = "australiaeast"
+  name     = "${var.org_name}-${var.location_abbreviation}-${var.environment_abbreviation}-arg-${var.solution_name}"
+  location = var.location
 }
