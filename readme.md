@@ -14,7 +14,9 @@ https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/azure-g
 `terraform apply -var-file ".\environments\dev.tfvars"`
 
 # Terraform to Azure via GitHub
-https://thomasthornton.cloud/2021/03/19/deploy-terraform-using-github-actions-into-azure/
+Started with this : https://thomasthornton.cloud/2021/03/19/deploy-terraform-using-github-actions-into-azure/
+
+However it appears that it's obsolete and has been superseded by this : https://github.com/hashicorp/setup-terraform
 
 ## Create the resource group
 Note that although we could have let Terraform do this, we want to set it up here first so that when we create a service principal later, we can just grant it access to the RG.
