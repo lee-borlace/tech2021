@@ -6,6 +6,7 @@ variable "solution_name" {}
 variable "environment_abbreviation" {}
 variable "location" {}
 variable "location_abbreviation" {}
+variable "resource_group_name" {}
 
 
 

@@ -11,7 +11,7 @@ https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/azure-g
 
 `terraform validate`
 
-`terraform apply -var-file ".\environments\test.tfvars"`
+`terraform apply -var-file ".\environments\dev.tfvars"`
 
 # Terraform to Azure via GitHub
 https://thomasthornton.cloud/2021/03/19/deploy-terraform-using-github-actions-into-azure/
