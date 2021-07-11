@@ -45,7 +45,7 @@ jobs:
 
     - name: Terraform Init
       id: init
-      run: terraform init -var-file "/deploy/terraform/environments/test.tfvars"
+      run: terraform init -var-file "./deploy/terraform/environments/test.tfvars"
       continue-on-error: false
 
     - name: Terraform Validate
@@ -55,11 +55,11 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color -var-file "/deploy/terraform/environments/test.tfvars"
+      run: terraform plan -no-color -var-file "./deploy/terraform/environments/test.tfvars"
       continue-on-error: false
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/master'      
       id: apply
-      run: terraform apply -no-color -var-file "/deploy/terraform/environments/test.tfvars"
+      run: terraform apply -no-color -var-file "./deploy/terraform/environments/test.tfvars"
       continue-on-error: false
