@@ -1,4 +1,4 @@
-# Terraform
+# Terraform Local
 https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/azure-get-started
 
 `choco install terraform`
@@ -11,3 +11,4 @@ https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/azure-g
 
 `terraform validate`
 
+`terraform apply -var-file ".\environments\test.tfvars"`
