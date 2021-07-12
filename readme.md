@@ -18,6 +18,8 @@ Started with this : https://thomasthornton.cloud/2021/03/19/deploy-terraform-usi
 
 However it appears that it's obsolete and has been superseded by this : https://github.com/hashicorp/setup-terraform
 
+This uses a single blob container for the Terraform backend. This is because the terraform file doesn't allow variables in the backend section - so you can't have different back ends for different environments. So test, stage, prod all share the same container but with different folders - not ideal! TODO : In future, would it make sense to use Terraform Cloud as the backend? Does that give the advantage of environmental separation?
+
 ## Create the resource group
 Note that although we could have let Terraform do this, we want to set it up here first so that when we create a service principal later, we can just grant it access to the RG.
 
@@ -48,15 +50,29 @@ Take note of the resulting client ID, secret etc and store somewhere out of sour
 
 ## Add permissions to resources for the service principal
 
-Note that these need the object ID not the application ID!
+Note that these need the object ID of the service principal not the application ID!
 
-https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal
+### Storage
 
-Add the service principal to storage container :
+See here for info on blob permissions : 
+https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal 
+https://docs.microsoft.com/en-us/azure/storage/blobs/authorize-data-operations-portal
+https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage
 
-`az role assignment create --assignee-principal-type ServicePrincipal --role "Storage Blob Data Contributor" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-all-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydallstarwaterra/blobServices/default/containers/terrastate"`
+It seems that you need to add a role for the service principal which has this action : *Microsoft.Storage/storageAccounts/listkeys/action*. This will allow the account to retrieve the keys which it would then use to actually access the data.
 
-Resource group :
+It seems these are the roles (with increasing power) which allow this :
+
+- The Reader and Data Access role
+- The Storage Account Contributor role
+- The Azure Resource Manager Contributor role
+- The Azure Resource Manager Owner role
+
+Add the service principal to storage container. We'll use the 1st role above for minimum permissions :
+
+`az role assignment create --assignee-principal-type ServicePrincipal --role "Reader and Data Access" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-all-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydallstarwaterra/blobServices/default/containers/terrastate"`
+
+### Resource Group
 
 `az role assignment create --assignee-principal-type ServicePrincipal --role "Contributor" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-tst-arg-rwaterra"`
 
