@@ -49,14 +49,9 @@ jobs:
       run: terraform validate -no-color
       continue-on-error: false
 
-    - name: Print workspace
-      id: pws
-      run: $GITHUB_WORKSPACE
-      continue-on-error: false      
-
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color -var-file "$GITHUB_WORKSPACE/environments/test.tfvars"
+      run: terraform plan -no-color -var-file "$GITHUB_WORKSPACE/deploy/terraform/environments/test.tfvars"
       continue-on-error: false
 
     - uses: actions/github-script@0.9.0
@@ -91,5 +86,5 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/master'      
       id: apply
-      run: terraform apply -no-color -var-file "$GITHUB_WORKSPACE/environments/test.tfvars" -input=false -auto-approve
+      run: terraform apply -no-color -var-file "$GITHUB_WORKSPACE/deploy/terraform/environments/test.tfvars" -input=false -auto-approve
       continue-on-error: false
