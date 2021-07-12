@@ -94,3 +94,4 @@ terraform workspace new test
 terraform workspace new stage
 terraform workspace new prod
 ```
+
