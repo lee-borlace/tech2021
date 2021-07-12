@@ -20,7 +20,7 @@ However it appears that it's obsolete and has been superseded by this : https://
 
 This uses a single blob container for the Terraform backend. This is because the terraform file doesn't allow variables in the backend section - so you can't have different back ends for different environments. So test, stage, prod all share the same container but with different folders - not ideal! TODO : In future, would it make sense to use Terraform Cloud as the backend? Does that give the advantage of environmental separation?
 
-## Create the resource group
+## Create the resource group to be deployed to
 Note that although we could have let Terraform do this, we want to set it up here first so that when we create a service principal later, we can just grant it access to the RG.
 
 `az group create -n lee-syd-tst-arg-rwa -l australiaeast`
@@ -36,9 +36,7 @@ az storage account create -n leesydallstarwaterra -g lee-syd-all-arg-rwaterra -l
 az storage container create -n terrastate --account-name leesydallstarwaterra
 ```
 
-TODO : In future, look at whether we can turn off shared keys via the following for extra security.
-
-`az storage account update --name leesydallstarwaterra --resource-group lee-syd-all-arg-rwaterra --allow-shared-key-access false`    
+TODO : In future, look at whether we can turn off shared keys via the following for extra security : `az storage account update --name leesydallstarwaterra --resource-group lee-syd-all-arg-rwaterra --allow-shared-key-access false`    
 
 ## Create service principal for deployments
 
@@ -52,7 +50,7 @@ Take note of the resulting client ID, secret etc and store somewhere out of sour
 
 Note that these need the object ID of the service principal not the application ID!
 
-### Storage
+### Storage Permissions
 
 See here for info on blob permissions : 
 https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal 
@@ -72,9 +70,9 @@ Add the service principal to storage container. We'll use the 1st role above for
 
 `az role assignment create --assignee-principal-type ServicePrincipal --role "Reader and Data Access" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-all-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydallstarwaterra"`
 
-### Resource Group
+### Resource Group Permissions
 
-`az role assignment create --assignee-principal-type ServicePrincipal --role "Contributor" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-tst-arg-rwaterra"`
+`az role assignment create --assignee-principal-type ServicePrincipal --role "Contributor" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-tst-arg-rwa"`
 
 ## Set up variables in relevant environment for the deployment service principal
 We need to tell GH about the service principal so it can use it to deploy. Set up these for each environment, and plug in the details from our service principal.
@@ -89,6 +87,8 @@ Before the workflow will work OK, need to set up workspaces in the backend.
 
 TODO : In future, can this part happen as part of the workflow? I.e. check if workspace exists and if not create it, otherwise switch to it.
 
+Run these locally :
+
 ```
 terraform workspace new test
 terraform workspace new stage
@@ -96,4 +96,4 @@ terraform workspace new prod
 ```
 
 ## Variable files
-Variable files are gitignored. Don't check them in, and find other ways of injecting the values - via environment variables.
+Variable files are gitignored. After going down the wrong path I realised this and switched from variable files to injecting via environment variables.
