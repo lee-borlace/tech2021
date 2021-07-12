@@ -1,12 +1,23 @@
 # Solution-wide
-variable "org_name" {}
-variable "solution_name" {}
+variable "org_name" {
+    default = "lee"
+}
+
+variable "solution_name" {
+    default = "rwa" 
+}
+
+variable "location" {
+    default = "australiaeast"
+}
+
+variable "location_abbreviation" {
+    default = "syd"
+}
 
 # Environment-specific
-variable "environment_abbreviation" {}
-variable "location" {}
-variable "location_abbreviation" {}
-variable "resource_group_name" {}
+variable "TERRA_RESOURCE_GROUP_NAME" {}
+variable "TERRA_ENVIRONMENT_ABBREVIATION" {}
 
 
 

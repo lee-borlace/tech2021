@@ -95,3 +95,5 @@ terraform workspace new stage
 terraform workspace new prod
 ```
 
+## Variable files
+Variable files are gitignored. Don't check them in, and find other ways of injecting the values.
