@@ -24,21 +24,19 @@ Note that although we could have let Terraform do this, we want to set it up her
 `az group create -n lee-syd-tst-arg-rwa -l australiaeast`
 
 ## Create storage for holding terraform state
-Do this for each environment
+This will be shared for all environments.
 
 Create storage and container
 
 ```
-az group create -n lee-syd-tst-arg-rwaterra -l australiaeast
-az storage account create -n leesydtststarwaterra -g lee-syd-tst-arg-rwaterra -l australiaeast --sku Standard_LRS
-az storage container create -n terrastate --account-name leesydtststarwaterra
+az group create -n lee-syd-all-arg-rwaterra -l australiaeast
+az storage account create -n leesydallstarwaterra -g lee-syd-all-arg-rwaterra -l australiaeast --sku Standard_LRS
+az storage container create -n terrastate --account-name leesydallstarwaterra
 ```
 
-Turn off "Allow shared key access" for the storage account via configuration, so that only Azure AD-authorised requests may work. Note may need to update the az module via `az upgrade` first before this command will work.
+TODO : In future, look at whether we can turn off shared keys via the following for extra security.
 
-TODO : May need to remove this point. In a later step I added explicit service principal access via Storage Blob Data Owner but I believe that may not work. May need to instead leave shared keys on, and add a perm at the storage level which includes *Microsoft.Storage/storageAccounts/listKeys/action* at the storage account level. As per https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal
-
-`az storage account update --name leesydtststarwaterra --resource-group lee-syd-tst-arg-rwaterra --allow-shared-key-access false`    
+`az storage account update --name leesydallstarwaterra --resource-group lee-syd-all-arg-rwaterra --allow-shared-key-access false`    
 
 ## Create service principal for deployments
 
@@ -54,29 +52,29 @@ Note that these need the object ID not the application ID!
 
 https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal
 
-First need to add ourself to the storage account because we turned off shared access keys. Without this, you'll get errors in the portal.
+Add the service principal to storage container :
 
-`az role assignment create --role "Storage Blob Data Owner" --assignee lee@lee79.onmicrosoft.com --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-tst-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydtststarwaterra"`
-
-Now add the service principal to storage container :
-
-`az role assignment create --assignee-principal-type ServicePrincipal --role "Storage Blob Data Contributor" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-tst-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydtststarwaterra/blobServices/default/containers/terrastate"`
-
-TODO : Note that as noted above it may be needed to instead leave on shared access keys and add something like this at the storage account level as per https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal :
-
-`az role assignment create --role "TODO" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-tst-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydtststarwaterra"`
+`az role assignment create --assignee-principal-type ServicePrincipal --role "Storage Blob Data Contributor" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-all-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydallstarwaterra/blobServices/default/containers/terrastate"`
 
 Resource group :
 
 `az role assignment create --assignee-principal-type ServicePrincipal --role "Contributor" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-tst-arg-rwaterra"`
 
 ## Set up variables in relevant environment for the deployment service principal
-We need to tell GH about the service principal so it can use it to deploy. Set up these for each environment, and plug in the details from our SP
+We need to tell GH about the service principal so it can use it to deploy. Set up these for each environment, and plug in the details from our service principal.
 
 AZURE_AD_CLIENT_ID – Will be the service principal ID from above
 AZURE_AD_CLIENT_SECRET – The secret that was created as part of the Azure Service Principal
 AZURE_AD_TENANT_ID – The Azure AD tenant ID to where the service principal was created
 AZURE_SUBSCRIPTION_ID – Subscription ID of where you want to deploy the Terraform
 
+## Set up workspace in remote backend
+Before the workflow will work OK, need to set up workspaces in the backend.
 
+TODO : In future, can this part happen as part of the workflow? I.e. check if workspace exists and if not create it, otherwise switch to it.
 
+```
+terraform workspace new test
+terraform workspace new stage
+terraform workspace new prod
+```
