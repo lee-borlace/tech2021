@@ -29,16 +29,6 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Print Location
-      id: prl
-      run: pwd
-      continue-on-error: false
-
-    - name: Print Contents
-      id: prc
-      run: ls
-      continue-on-error: false
-
     - name: Terraform Format
       id: fmt
       run: terraform fmt -check
