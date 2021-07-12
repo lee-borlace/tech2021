@@ -53,7 +53,7 @@ resource "azurerm_app_service" "web" {
   }
 
   app_settings = {
-    "SOME_KEY" = "some-value"
+    "SOME_KEY" = "some-value2"
   }
 
 }
