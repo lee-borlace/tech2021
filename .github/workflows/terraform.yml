@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Plan and Apply Terraform Infrastructure'
  
 on:
   push:
@@ -11,7 +11,7 @@ on:
  
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Plan and Apply Terraform Infrastructure'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
