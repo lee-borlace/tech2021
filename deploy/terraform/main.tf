@@ -22,9 +22,9 @@ provider "azurerm" {
 }
 
 resource "azurerm_log_analytics_workspace" "law" {
-  name                = "${var.org_name}-${var.location_abbreviation}-${var.TERRA_ENVIRONMENT_ABBREVIATION}-law-${var.solution_name}"
+  name                = "${var.org_name}-${var.location_abbreviation}-${var.environment_abbreviation}-law-${var.solution_name}"
   location            = var.location
-  resource_group_name = var.TERRA_RESOURCE_GROUP_NAME
+  resource_group_name = var.resource_group_name
   sku                 = "PerGB2018"
   retention_in_days   = 30
 }

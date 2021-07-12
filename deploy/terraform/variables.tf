@@ -16,8 +16,5 @@ variable "location_abbreviation" {
 }
 
 # Environment-specific
-variable "TERRA_RESOURCE_GROUP_NAME" {}
-variable "TERRA_ENVIRONMENT_ABBREVIATION" {}
-
-
-
+variable "resource_group_name" {}
+variable "environment_abbreviation" {}
