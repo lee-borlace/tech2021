@@ -68,9 +68,9 @@ It seems these are the roles (with increasing power) which allow this :
 - The Azure Resource Manager Contributor role
 - The Azure Resource Manager Owner role
 
-Add the service principal to storage container. We'll use the 1st role above for minimum permissions :
+Add the service principal to storage container. We'll use the 1st role above for minimum permissions, and we'll add it at the storage account level :
 
-`az role assignment create --assignee-principal-type ServicePrincipal --role "Reader and Data Access" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-all-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydallstarwaterra/blobServices/default/containers/terrastate"`
+`az role assignment create --assignee-principal-type ServicePrincipal --role "Reader and Data Access" --assignee-object-id aae1e7e4-68f8-4c7a-91d9-4eb4143a1095 --scope "/subscriptions/0a9a85bf-2d3c-47c6-bd3f-278487a44732/resourceGroups/lee-syd-all-arg-rwaterra/providers/Microsoft.Storage/storageAccounts/leesydallstarwaterra"`
 
 ### Resource Group
 
