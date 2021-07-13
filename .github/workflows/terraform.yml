@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'deploy/terraform/**'
+    # paths:
+    #   - 'deploy/terraform/**'
   pull_request:
     branches:
       - master
-    paths:
-      - 'deploy/terraform/**'      
+    # paths:
+    #   - 'deploy/terraform/**'      
   workflow_dispatch:
  
 jobs:
