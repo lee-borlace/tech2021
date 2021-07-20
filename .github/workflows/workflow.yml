@@ -38,9 +38,9 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Terraform Plan and Apply
+    - name: Terraform
       shell: pwsh
-      run: ./terraform.ps1 -apply $True
+      run: ./terraform.ps1 -github_ref {{github.ref}}
 
     # - name : Write Terraform Plan to PR Message
     #   uses: actions/github-script@0.9.0
@@ -71,9 +71,3 @@ jobs:
     #         repo: context.repo.repo,
     #         body: output
     #       })      
-
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/master'      
-    #   id: apply
-    #   run: terraform apply -no-color -input=false -auto-approve
-    #   continue-on-error: false
