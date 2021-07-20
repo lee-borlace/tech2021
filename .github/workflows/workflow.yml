@@ -47,7 +47,8 @@ jobs:
       uses: hashicorp/setup-terraform@v1
 
     - name: Terraform Plan and Apply
-      run: ./terraform.sh
+      shell: pwsh
+      run: ./terraform.ps1
 
     # - name : Write Terraform Plan to PR Message
     #   uses: actions/github-script@0.9.0
