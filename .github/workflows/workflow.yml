@@ -46,8 +46,8 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Script executable
-      run: chmod +x ./terraform.sh
+    # - name: Script executable
+    #   run: chmod +x ./terraform.sh
 
     - name: Terraform Plan and Apply
       run: ./terraform.sh
