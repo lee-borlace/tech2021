@@ -47,7 +47,7 @@ jobs:
       uses: hashicorp/setup-terraform@v1
 
     - name: Terraform Plan and Apply
-      run: deploy/terraform/terraform.sh
+      run: ./terraform.sh
 
     # - name: Terraform General Init
     #   id: generalinit
