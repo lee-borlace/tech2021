@@ -4,17 +4,9 @@ on:
   push:
     branches:
       - master
-      # - deploy-test
-      # - deploy-stage
-    # paths:
-    #   - 'deploy/terraform/**'
   pull_request:
     branches:
       - master
-      # - deploy-test
-      # - deploy-stage
-    # paths:
-    #   - 'deploy/terraform/**'      
   workflow_dispatch:
  
 jobs:
@@ -48,7 +40,7 @@ jobs:
 
     - name: Terraform Plan and Apply
       shell: pwsh
-      run: ./terraform.ps1
+      run: ./terraform.ps1 -apply $True
 
     # - name : Write Terraform Plan to PR Message
     #   uses: actions/github-script@0.9.0
