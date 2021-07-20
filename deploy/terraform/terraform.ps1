@@ -1,5 +1,7 @@
 param ([string] $github_ref)
 
+Write-Host "github_ref=$github_ref"
+
 Write-Host "***********************************************"
 Write-Host "Main init"
 Write-Host "***********************************************"
