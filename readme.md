@@ -97,3 +97,8 @@ terraform workspace new prod
 
 ## Variable files
 Variable files are gitignored. After going down the wrong path I realised this and switched from variable files to injecting via environment variables.
+
+## Script executable permissions
+If you want to be able to execute a bash script from Github actions, it needs to be marked as executable within git. To do this from the command line before commiting, you can do this :
+
+`git update-index --chmod=+x terraform.sh`
