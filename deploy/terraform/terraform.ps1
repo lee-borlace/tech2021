@@ -1,4 +1,5 @@
 param ([string] $github_ref)
+param ([string] $workspace)
 
 Write-Host "github_ref=$github_ref"
 
@@ -10,7 +11,7 @@ terraform init -no-color
 Write-Host "***********************************************"
 Write-Host "Workspace select"
 Write-Host "***********************************************"
-terraform workspace select test -no-color
+terraform workspace select $workspace -no-color
 
 Write-Host "***********************************************"
 Write-Host "Workspace init"
