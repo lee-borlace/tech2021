@@ -36,7 +36,8 @@ az storage account create -n leesydallstarwaterra -g lee-syd-all-arg-rwaterra -l
 az storage container create -n terrastate --account-name leesydallstarwaterra
 ```
 
-TODO : In future, look at whether we can turn off shared keys via the following for extra security : `az storage account update --name leesydallstarwaterra --resource-group lee-syd-all-arg-rwaterra --allow-shared-key-access false`    
+TODO : In future, look at whether we can turn off shared keys via the following for extra security : 
+`az storage account update --name leesydallstarwaterra --resource-group lee-syd-all-arg-rwaterra --allow-shared-key-access false`    
 
 ## Create service principal for deployments
 
@@ -49,6 +50,10 @@ Take note of the resulting client ID, secret etc and store somewhere out of sour
 ## Add permissions to resources for the service principal
 
 Note that these need the object ID of the service principal not the application ID!
+
+You can use this to get it :
+
+`az ad sp show --id <APP ID> --query objectId --out tsv`
 
 ### Storage Permissions
 
