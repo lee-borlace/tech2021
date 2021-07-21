@@ -1,5 +1,8 @@
-param ([string] $github_ref)
-param ([string] $workspace)
+param (
+    [string] $github_ref, 
+    [string] $workspace
+)
+
 
 Write-Host "github_ref=$github_ref"
 
