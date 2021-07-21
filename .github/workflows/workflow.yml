@@ -40,7 +40,7 @@ jobs:
 
     - name: Terraform
       shell: pwsh
-      run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace testxxxxxx
+      run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace test
 
   # ***********************************************************************
   # JOB : Terraform STAGE
