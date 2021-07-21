@@ -9,34 +9,34 @@ Write-Host "github_ref=$github_ref"
 Write-Host "***********************************************"
 Write-Host "Main init"
 Write-Host "***********************************************"
-terraform init -no-color
+terraform init
 
 Write-Host "***********************************************"
 Write-Host "Workspace select"
 Write-Host "***********************************************"
-terraform workspace select $workspace -no-color
+terraform workspace select $workspace
 
 Write-Host "***********************************************"
 Write-Host "Workspace init"
 Write-Host "***********************************************"
-terraform init -no-color
+terraform init
 
 Write-Host "***********************************************"
 Write-Host "Validate"
 Write-Host "***********************************************"
-terraform validate -no-color
+terraform validate
 
 Write-Host "***********************************************"
 Write-Host "Plan"
 Write-Host "***********************************************"
-terraform plan -no-color
+terraform plan 
 
 if($github_ref -eq "refs/heads/master") {
     Write-Host "***********************************************"
     Write-Host "Called from master branch, applying."
     Write-Host "***********************************************"
 
-    terraform apply -no-color -input=false -auto-approve
+    terraform apply -input=false -auto-approve
 } else {
     Write-Host "***********************************************"
     Write-Host "Not called from master branch, not applying."
