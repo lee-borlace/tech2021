@@ -40,7 +40,7 @@ jobs:
 
     - name: Terraform
       shell: pwsh
-      run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace test
+      run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace testxxxxxx
 
   # ***********************************************************************
   # JOB : Terraform STAGE
@@ -72,7 +72,7 @@ jobs:
 
     - name: Terraform
       shell: pwsh
-      run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace stagexxxxxx
+      run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace stage
 
     # - name : Write Terraform Plan to PR Message
     #   uses: actions/github-script@0.9.0
