@@ -42,4 +42,4 @@ jobs:
 
     - name: Build Code
       shell: pwsh
-      run: ./buildCode.ps1
+      run: ./buildAndTest.ps1
