@@ -2,13 +2,9 @@ name: 'Infrastructure'
  
 on:
   push:
-    branches:
-      - master
     paths:
       - 'deploy/terraform/**'
   pull_request:
-    branches:
-      - master
     paths:
       - 'deploy/terraform/**'
   workflow_dispatch:
@@ -64,7 +60,7 @@ jobs:
  
     defaults:
       run:
-        shell: bash
+        shell: pwsh
         working-directory: deploy/terraform
  
     steps:

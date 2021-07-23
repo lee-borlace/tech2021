@@ -1,0 +1,41 @@
+name: 'Code'
+ 
+on:
+  push:
+    paths:
+      - 'src/**'
+  pull_request:
+    paths:
+      - 'src/**'
+  workflow_dispatch:
+ 
+env:
+  NODE_VERSION: '12.x'       
+
+jobs:
+  
+  # ***********************************************************************
+  # JOB : Code TEST
+  # ***********************************************************************
+  code_test:
+    name: 'Code TEST'
+    runs-on: ubuntu-latest
+    environment: Test
+ 
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: build
+ 
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}      
+
+    - name: Build Code
+      shell: pwsh
+      run: ./buildCode.ps1
