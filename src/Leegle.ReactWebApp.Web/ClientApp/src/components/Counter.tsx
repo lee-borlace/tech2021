@@ -17,7 +17,7 @@ class Counter extends React.PureComponent<CounterProps> {
 
                 <p>This is a simple example of a React component.</p>
 
-                <p aria-live="polite">Current count: <strong>{this.props.count}</strong></p>
+                <p aria-live="polite">Current count : <strong>{this.props.count}</strong></p>
 
                 <button type="button"
                     className="btn btn-primary btn-lg"
