@@ -29,7 +29,7 @@ jobs:
  
     defaults:
       run:
-        shell: bash
+        shell: pwsh
         working-directory: deploy/terraform
  
     steps:
@@ -40,7 +40,6 @@ jobs:
       uses: hashicorp/setup-terraform@v1
 
     - name: Terraform
-      shell: pwsh
       run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace test
 
   # ***********************************************************************
@@ -72,7 +71,6 @@ jobs:
       uses: hashicorp/setup-terraform@v1
 
     - name: Terraform
-      shell: pwsh
       run: ./terraform.ps1 -github_ref ${{github.ref}} -workspace stage
 
     # - name : Write Terraform Plan to PR Message
