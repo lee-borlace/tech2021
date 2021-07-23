@@ -1,12 +1,16 @@
-name: 'Infra, Build, Test, Deploy'
+name: 'Infrastructure'
  
 on:
   push:
     branches:
       - master
+    paths:
+      - 'deploy/terraform/**'
   pull_request:
     branches:
       - master
+    paths:
+      - 'deploy/terraform/**'
   workflow_dispatch:
  
 jobs:
