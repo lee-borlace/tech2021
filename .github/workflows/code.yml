@@ -5,10 +5,12 @@ on:
     paths:
       - 'src/**'
       - 'build/**'
+      - '.github/workflows/code.yml'
   pull_request:
     paths:
       - 'src/**'
       - 'build/**'
+      - '.github/workflows/code.yml'
   workflow_dispatch:
  
 env:

@@ -4,9 +4,10 @@ on:
   push:
     paths:
       - 'deploy/terraform/**'
+      - '.github/workflows/infrastructure.yml'
   pull_request:
     paths:
-      - 'deploy/terraform/**'
+      - '.github/workflows/infrastructure.yml'
   workflow_dispatch:
  
 jobs:
