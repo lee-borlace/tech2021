@@ -17,10 +17,10 @@ env:
 jobs:
   
   # ***********************************************************************
-  # JOB : Code TEST
+  # JOB : Build
   # ***********************************************************************
-  code_test:
-    name: 'Code TEST'
+  build:
+    name: 'Build'
     runs-on: ubuntu-latest
     environment: Test
  
