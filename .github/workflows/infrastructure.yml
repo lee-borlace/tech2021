@@ -26,6 +26,7 @@ jobs:
       TF_VAR_environment_abbreviation : "tst"
     runs-on: ubuntu-latest
     environment: Test
+    continue-on-error: false
  
     defaults:
       run:
@@ -57,6 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Stage
     needs: terraform_test
+    continue-on-error: false
  
     defaults:
       run:
